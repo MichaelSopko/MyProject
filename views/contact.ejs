@@ -1,0 +1,37 @@
+<%layout('./layout/page') %>
+<%block('title', 'Contact')%>
+
+<!-- _________________________ Start Page ___________________________ -->
+<div class="content_center">
+    <div id="home">
+        <h2 class="home">Contacts</h2>
+        Fell free to contact me to say hello. Required fields are marked
+    </div>
+
+        <form id="contactform" class="form-horizontal contact-form" name="contact-form">
+
+            <div class="main-form-group">
+                <div class="form-group">
+                    <label for="name" class="control-label">Name<span> *</span></label>
+                    <input type="text" name="name" id="name" value="" size="22" tabindex="3" />
+                </div>
+                <div class="cl"></div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email<span> *</span></label>
+                    <input type="text" name="email" id="email" value="" size="22" tabindex="4" />
+                </div>
+                <div class="cl"></div>
+                <div class="form-group">
+                    <label for="message" class="control-label">Message<span> *</span></label>
+                    <textarea name="message" id="message" cols="28" rows="6" tabindex="7"></textarea>
+                </div>
+                <div><input type="hidden" value="example@example.com" id="contactemail" name="contactemail" /></div>
+                <div>
+                    <a href="#" class="button btn_1" id="formsend" tabindex="8">Send message</a>
+                    <div class="loading"></div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

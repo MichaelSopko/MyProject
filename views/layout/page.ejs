@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%=blocks.title%></title>
+
+    <link rel='stylesheet' href='/css/style.css'  type="text/css" />
+
+    <script src="/vendor/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+<header>
+    <%-blocks.header%>
+</header>
+<session class="containern">
+
+    <div class="menu">
+        <a href="../">Main</a> |
+        <% if(user){ %>
+        <a href="../chat">Chat</a> |
+        <% } %>
+        <a href="../blog">Blog</a> |
+        <a href="../contact">Contact</a> |
+        <a href="../about">About</a>
+    </div>
+
+    <div class="content" >
+
+        <div class="menu_left"></div>
+
+        <div class="menu_right">
+            <%-partial('../partials/rightNavigation')%>
+        </div>
+
+        <%-body -%>
+        <div class="clear"></div>
+
+    </div>
+
+</session>
+<footer>
+    <%-blocks.footer%>
+</footer>
+</body>
+</html>

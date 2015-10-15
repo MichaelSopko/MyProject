@@ -1,0 +1,54 @@
+<%layout('./layout/page') %>
+<%block('title', 'Chat')%>
+
+<div class="content_center">
+    <div class="main-form-group">
+
+        <h1 class="lead">Welcome to chat <%=user.get('username')   %>!</h1>
+        <div class="form-group">
+            <form id="publish" class="form-horizontal form-inline">
+                <input type="text" name="message"/>
+                <input type="submit" class="btn btn-primary" value="send"/>
+            </form>
+            <ul id="messages">1</ul>
+        </div>
+    </div>
+
+    <script>
+        publish.onsubmit = function(){
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/chat", true);
+
+            xhr.send(JSON.stringify({message: this.elements.message.value}));
+
+            this.elements.message.value = '';
+
+            return  false;
+        };
+
+        subscribe();
+
+        function subscribe(){
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "/subscribe", true);
+
+            xhr.onload = function(){
+                var li = document.createElement('li');
+                li.textContent = this.responseText;
+                messages.appendChild(li);
+                console.log('================================');
+                subscribe();
+            };
+
+            xhr.onerror = xhr.onabort = function(){
+                setTimeout(subscribe, 500);
+            };
+
+            xhr.send('');
+        }
+    </script>
+
+</div>

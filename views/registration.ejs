@@ -1,0 +1,74 @@
+<%layout('./layout/page') %>
+<%block('title', 'Registration')%>
+
+<div class="content_center">
+
+    <h1 id="title">Sign Up</h1>
+    <p>It's free and always will be.</p>
+
+    <form class="form-horizontal SingUp-form" name="SingUp-form">
+
+        <div class="main-form-group">
+
+            <div class="form-group">
+                <label for="input-firstname" class="control-label">First Name:</label>
+                <input name="firstname" value="firstname" type="text" class="form-control" id="input-firstname">
+            </div>
+
+            <div class="form-group">
+                <label for="input-lastname" class="control-label">Last Name:</label>
+                <input name="lastname" value="lastname" type="text" class="form-control" id="input-lastname">
+            </div>
+
+            <div class="form-group">
+                <label for="input-login" class="control-label">Login:</label>
+
+                <input name="login" value="login" type="text" class="form-control" id="input-login">
+            </div>
+
+            <div class="form-group">
+                <label for="input-password" class="control-label">Password</label>
+                <input name="password" value="pass" type="text" class="form-control" id="input-password">
+            </div>
+
+            <div class="form-group">
+                <label for="input-email" class="control-label">Password</label>
+                <input name="email" value="example@example.com" type="email" class="form-control" id="input-email">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-loading-text="Send...">Enter</button>
+            </div>
+        </div>
+
+    </form>
+
+    <script>
+        $(document.forms['SingUp-form']).on('submit',function(){
+            var form = $(this);
+
+            $('.error',form).html('');
+            $(':submit', form).button("loading");
+console.log('dff');
+            $.ajax({
+                url: "/registration",
+                method: "POST",
+                data: form.serialize(),
+                complete: function () {
+                    $(":submit", form).button("reset");
+                },
+                statusCode: {
+                    200: function(){
+                        form.html  ("Welcome").addClass('alert-success');
+                        window.location.href = "/chat";
+                    },
+                    404: function(jqXHR){
+                        var error = JSON.parse(jqXHR.responseText);
+                        $('.error',form).html(error.message);
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+</div>
